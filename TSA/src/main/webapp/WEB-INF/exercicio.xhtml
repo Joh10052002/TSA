@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Gerenciador de exercícios</title>
+</h:head>
+<h:body>
+<h:form>
+	
+	Nome: <h:inputText value="#{exercicioBean.exercicio.nomeExer}"></h:inputText> 
+
+	<h:commandButton value="Adicionar"
+			action="#{exercicioBean.addExercicio()}"></h:commandButton>
+
+	<h:commandButton value="Buscar"
+			action="#{exercicioBean.buscarExercicio()}"></h:commandButton>
+			
+	<h:dataTable var="exer" value="#{exercicioBean.exerciciosFiltrados}">
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{exer.nomeExer}" />
+		</h:column>
+			<h:commandButton value="Remover"
+				action="#{exercicioBean.removeExercicio(exer.nomeExer)}"></h:commandButton>
+		</h:column>
+
+	</h:dataTable>
+</h:form>
+</h:body>
+
+</html>
+	
