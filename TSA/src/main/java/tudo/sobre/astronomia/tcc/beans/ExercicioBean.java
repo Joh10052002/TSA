@@ -1,22 +1,32 @@
 package tudo.sobre.astronomia.tcc.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import TSA.Services.ExerService;
 import tudo.sobre.astronomia.tcc.Exercicio;
 
-@ManagedBean
-@ApplicationScoped
-public class ExercicioBean {
+@ViewScoped
+@Named
+public class ExercicioBean implements Serializable {
 	
-	// atributos 
+
+	@Inject
+	private ExerService service;
+
+	protected Exercicio exercicio;
+
+	protected Collection<Exercicio> exercicios;
+
+	public ExercicioBean() {
+	}
 	
-	private ArrayList<Exercicio> exercicios = new ArrayList<Exercicio>();
-	private ArrayList<Exercicio> exerciciosFiltrados = exercicios;
-	private String idExer;
-	private String nomeExer;
-	private Exercicio exercicio = new Exercicio(idExer, nomeExer);
+	
 	 
 	// Get e Set
 	

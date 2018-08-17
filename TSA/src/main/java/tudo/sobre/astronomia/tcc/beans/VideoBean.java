@@ -2,8 +2,13 @@ package tudo.sobre.astronomia.tcc.beans;
 
 import java.util.ArrayList;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import tudo.sobre.astronomia.tcc.Video;
 
+@ViewScoped
+@Named
 public class VideoBean {
 
 	// atributos
