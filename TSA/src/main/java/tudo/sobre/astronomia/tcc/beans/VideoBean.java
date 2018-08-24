@@ -1,25 +1,42 @@
 package tudo.sobre.astronomia.tcc.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-import tudo.sobre.astronomia.tcc.Video;
 
 @ViewScoped
 @Named
-public class VideoBean {
+public class VideoBean implements Serializable {
+	
 
-	// atributos
+	@Inject
+	private VideoService service;
 
-	private ArrayList<Video> videos = new ArrayList<Video>();
-	private ArrayList<Video> videosFiltrados = videos;
-	private String idVid;
-	private String nomeVid;
-	private Video video = new Video(idVid, nomeVid);
+	protected Video video;
 
-	// Get e Set
+	protected Collection<Video> videos;
+
+	public VideoBean() {
+	}
+	
+	
+	 
+	@PostConstruct
+	public void init() {
+		video = newVideo();
+		videos = getService().getAll();
+	}
+
+	public void remove(Video video) {
+		getService().remove(video);
+		limpar();
+	}
 
 	public Video getVideo() {
 		return video;
@@ -29,40 +46,35 @@ public class VideoBean {
 		this.video = video;
 	}
 
-	// Metodos
-
-	public void addExercicio() {
-		videos.add(video);
-		video = new Video(idVid, nomeVid);
-	}
-
-	public void todosVideos() {
-		videosFiltrados = videos;
-	}
-
-	public void buscarVideo() {
-		videosFiltrados = new ArrayList<>();
-		for (Video vid : videos) {
-			if (vid.getNomeVid().contains(video.getNomeVid())) {
-				videosFiltrados.add(vid);
-			}
-		}
-	}
-
-	public void removeVideo(String nomeVid) {
-		for (Video video : videos) {
-			if (video.getNomeVid().equals(nomeVid)) {
-				videos.remove(video);
-				return;
-			}
-		}
-	}
-
-	public ArrayList<Video> getVideos() {
+	public Collection<Video> getVideos() {
 		return videos;
 	}
 
-	public ArrayList<Video> getVideosFiltrados() {
-		return videosFiltrados;
+	public void setVideos(Collection<Video> videos) {
+		this.videos = videos;
 	}
+
+	public void save() {
+		getService().save(video);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getVideo().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		Videos = getService().getAll();
+		Video = newVideo();
+	}
+
+	protected Video newVideo() {
+		return new Video();
+	}
+
+	public VidService getService() {
+		return service;
+	}
+
 }

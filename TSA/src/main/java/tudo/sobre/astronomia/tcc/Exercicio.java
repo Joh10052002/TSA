@@ -3,25 +3,21 @@ package tudo.sobre.astronomia.tcc;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import TSA.entites.Identificavel;
+
 @Entity
-public class Exercicio {
+public class Exercicio implements Identificavel{
 	
 	@Id
-	private String idExer;
+	private Long id;
 	private String nomeExer;
 	
-	public Exercicio(String idExer, String nomeExer) {
-		super();
-		this.idExer = idExer;
-		this.nomeExer = nomeExer;
+	public Long getId() {
+		return id;
 	}
 
-	public String getIdExer() {
-		return idExer;
-	}
-
-	public void setIdExer(String idExer) {
-		this.idExer = idExer;
+	public void setId(Long idExer) {
+		this.id = idExer;
 	}
 
 	public String getNomeExer() {
@@ -31,8 +27,6 @@ public class Exercicio {
 	public void setNomeExer(String nomeExer) {
 		this.nomeExer = nomeExer;
 	}
-	
-	
 	
 
 }

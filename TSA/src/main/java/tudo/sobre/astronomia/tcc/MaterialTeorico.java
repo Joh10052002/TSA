@@ -1,22 +1,23 @@
 package tudo.sobre.astronomia.tcc;
 
-public class MaterialTeorico {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import TSA.entites.Identificavel;
+
+@Entity
+public class MaterialTeorico implements Identificavel {
 	
-	private String idMT;
+	@Id
+	private Long id;
 	private String nomeMT;
 	
-	public MaterialTeorico(String idMT, String nomeMT) {
-		super();
-		this.idMT = idMT;
-		this.nomeMT = nomeMT;
+	public Long getId() {
+		return id;
 	}
 
-	public String getIdMT() {
-		return idMT;
-	}
-
-	public void setIdMT(String idMT) {
-		this.idMT = idMT;
+	public void setId(Long idMT) {
+		this.id = idMT;
 	}
 
 	public String getNomeMT() {

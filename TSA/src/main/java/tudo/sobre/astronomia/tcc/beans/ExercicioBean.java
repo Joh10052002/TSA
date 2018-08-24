@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import TSA.Services.ExerService;
+import br.edu.ifpb.esperanca.daw2.ifoto.entities.Usuario;
+import br.edu.ifpb.esperanca.daw2.services.UserService;
 import tudo.sobre.astronomia.tcc.Exercicio;
 
 @ViewScoped
@@ -28,56 +31,54 @@ public class ExercicioBean implements Serializable {
 	
 	
 	 
-	// Get e Set
-	
+	@PostConstruct
+	public void init() {
+		exercicio = newExercicio();
+		exercicios = getService().getAll();
+	}
+
+	public void remove(Exercicio exercicio) {
+		getService().remove(exercicio);
+		limpar();
+	}
+
 	public Exercicio getExercicio() {
 		return exercicio;
 	}
-	
-	public void setExercicio (Exercicio exercicio) {
+
+	public void setExercicio(Exercicio exercicio) {
 		this.exercicio = exercicio;
 	}
-	
-	// Metodos
-	
-	public void addExercicio() {
-		exercicios.add(exercicio);
-		exercicio = new Exercicio(idExer, nomeExer);
-	}
-	
-	public void todosExercicios() {
-		exerciciosFiltrados = exercicios;
-	}
-	
-	public void buscarExercicio() {
-		exerciciosFiltrados = new ArrayList<>();
-		for (Exercicio exer: exercicios) {
-			if(exer.getNomeExer().contains(exercicio.getNomeExer())) {
-				exerciciosFiltrados.add(exer);
-			} 
-		}
-	}
-	
-	
-	public void removeExercicio(String nomeExer) {
-		for (Exercicio exercicio : exercicios) {
-			if(exercicio.getNomeExer().equals(nomeExer)) {
-				exercicios.remove(exercicio);
-				return;
-			}
-		}
-	}
-	
-	
-	public ArrayList<Exercicio> getExercicios() {
+
+	public Collection<Exercicio> getExercicios() {
 		return exercicios;
 	}
-		
-	
-	public ArrayList<Exercicio> getExercicicosFiltrados() {
-		return exerciciosFiltrados;
-	}
-}
 
-	
-	
+	public void setExercicios(Collection<Exercicio> exercicios) {
+		this.exercicios = exercicios;
+	}
+
+	public void save() {
+		getService().save(exercicio);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getExercicio().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		exercicios = getService().getAll();
+		exercicio = newExercicio();
+	}
+
+	protected Exercicio newExercicio() {
+		return new Exercicio();
+	}
+
+	public ExerService getService() {
+		return service;
+	}
+
+}

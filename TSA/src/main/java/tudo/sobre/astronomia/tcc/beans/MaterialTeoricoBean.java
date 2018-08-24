@@ -1,27 +1,45 @@
 package tudo.sobre.astronomia.tcc.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-import tudo.sobre.astronomia.tcc.MaterialTeorico;
+
 
 @ViewScoped
 @Named
-public class MaterialTeoricoBean {
+public class MaterialTeoricoBean implements Serializable {
+	
 
-	// atributos
+	@Inject
+	private MTService service;
 
-	private ArrayList<MaterialTeorico> materiaisTeoricos = new ArrayList<MaterialTeorico>();
-	private ArrayList<MaterialTeorico> mtFiltrados = materiaisTeoricos;
-	private String idMt;
-	private String nomeMt;
-	private MaterialTeorico materialTeorico = new MaterialTeorico(idMt, nomeMt);
+	protected MaterialTeorico materialTeorico;
 
-	// Get e Set
+	protected Collection<MaterialTeorico> materiaisTeoricos;
 
-	public MaterialTeorico getVideo() {
+	public MaterialTeoricoBean() {
+	}
+	
+	
+	 
+	@PostConstruct
+	public void init() {
+		materialTeorico = newMaterialTeorico();
+		materiaisTeoricos = getService().getAll();
+	}
+
+	public void remove(MaterialTeorico materialTeorico) {
+		getService().remove(materialTeorico);
+		limpar();
+	}
+
+	public MaterialTeorico getMaterialTeorico() {
 		return materialTeorico;
 	}
 
@@ -29,40 +47,35 @@ public class MaterialTeoricoBean {
 		this.materialTeorico = materialTeorico;
 	}
 
-	// Metodos
-
-	public void addMaterialTeorico() {
-		materiaisTeoricos.add(materialTeorico);
-		materialTeorico = new MaterialTeorico(idMt, nomeMt);
-	}
-
-	public void todosMaterialTeorico() {
-		mtFiltrados = materiaisTeoricos;
-	}
-
-	public void buscarMaterialTeorico() {
-		mtFiltrados = new ArrayList<>();
-		for (MaterialTeorico mt : materiaisTeoricos) {
-			if (mt.getNomeMT().contains(materialTeorico.getNomeMT())) {
-				mtFiltrados.add(mt);
-			}
-		}
-	}
-
-	public void removeMaterialTeorico(String nomeMt) {
-		for (MaterialTeorico materialTeorico : materiaisTeoricos) {
-			if (materialTeorico.getNomeMT().equals(nomeMt)) {
-				materiaisTeoricos.remove(materialTeorico);
-				return;
-			}
-		}
-	}
-
-	public ArrayList<MaterialTeorico> getVideos() {
+	public Collection<MaterialTeorico> getMateriaisTeoricos() {
 		return materiaisTeoricos;
 	}
 
-	public ArrayList<MaterialTeorico> getMtFiltrados() {
-		return mtFiltrados;
+	public void setMateriaisTeoricos(Collection<MaterialTeorico> materiaisTeoricos) {
+		this.materiaisTeoricos = materiaisTeoricos;
 	}
+
+	public void save() {
+		getService().save(materialTeorico);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getMaterialTeorico().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		materiaisTeoricos = getService().getAll();
+		materialTeorico = newMaterialTeorico();
+	}
+
+	protected MaterialTeorico newMaterialTeorico() {
+		return new MaterialTeorico();
+	}
+
+	public MTService getService() {
+		return service;
+	}
+
 }

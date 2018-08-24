@@ -1,23 +1,25 @@
 
 package tudo.sobre.astronomia.tcc;
 
-public class Video {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import TSA.entites.Identificavel;
+
+@Entity
+public class Video implements Identificavel {
 	
-	private String idVid;
+	@Id
+	private Long id;
 	private String nomeVid;
 	
-	public Video(String idVid, String nomeVid) {
-		super();
-		this.idVid = idVid;
-		this.nomeVid = nomeVid;
+
+	public Long getId() {
+		return id;
 	}
 
-	public String getIdVid() {
-		return idVid;
-	}
-
-	public void setIdVid(String idVid) {
-		this.idVid = idVid;
+	public void setId(Long idVid) {
+		this.id = idVid;
 	}
 
 	public String getNomeVid() {
