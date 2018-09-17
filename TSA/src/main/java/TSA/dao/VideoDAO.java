@@ -1,16 +1,11 @@
 package TSA.dao;
 
-import java.util.List;
+import tudo.sobre.astronomia.tcc.Video;
 
-public class VideoDAO extends DAO <MaterialTeorico> {
+public class VideoDAO extends DAO <Video> {
 	
-	public MaterialTeorico() {
-		super(MaterialTeorico.class);
+	public VideoDAO() {
+		super(Video.class);
 	}
-
-	public List<MaterialTeorico> findBy(MaterialTeoricoFiltro filtro) {
-		return null;
-	}
-	
 
 }

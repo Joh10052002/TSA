@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import TSA.entites.Identificavel;
+
 @ApplicationScoped
-public class DAO {
+public abstract class DAO<E extends Identificavel>  {
 
 	@Inject
 	private EntityManager em;

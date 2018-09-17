@@ -9,14 +9,15 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import TSA.Services.VidService;
+import tudo.sobre.astronomia.tcc.Video;
 
 @ViewScoped
 @Named
 public class VideoBean implements Serializable {
-	
 
 	@Inject
-	private VideoService service;
+	private VidService service;
 
 	protected Video video;
 
@@ -24,9 +25,7 @@ public class VideoBean implements Serializable {
 
 	public VideoBean() {
 	}
-	
-	
-	 
+
 	@PostConstruct
 	public void init() {
 		video = newVideo();
@@ -65,8 +64,8 @@ public class VideoBean implements Serializable {
 	}
 
 	public void limpar() {
-		Videos = getService().getAll();
-		Video = newVideo();
+		videos = getService().getAll();
+		video = newVideo();
 	}
 
 	protected Video newVideo() {

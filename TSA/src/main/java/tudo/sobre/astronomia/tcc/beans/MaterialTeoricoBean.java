@@ -9,12 +9,12 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-
+import TSA.Services.MTService;
+import tudo.sobre.astronomia.tcc.MaterialTeorico;
 
 @ViewScoped
 @Named
 public class MaterialTeoricoBean implements Serializable {
-	
 
 	@Inject
 	private MTService service;
@@ -25,9 +25,7 @@ public class MaterialTeoricoBean implements Serializable {
 
 	public MaterialTeoricoBean() {
 	}
-	
-	
-	 
+
 	@PostConstruct
 	public void init() {
 		materialTeorico = newMaterialTeorico();

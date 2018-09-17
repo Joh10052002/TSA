@@ -1,17 +1,13 @@
 package TSA.dao;
 
-import java.util.List;
+import tudo.sobre.astronomia.tcc.Exercicio;
 
 	public class ExercicioDAO extends DAO<Exercicio> {
 		
-		public Exercicio() {
+		public ExercicioDAO() {
 			super(Exercicio.class);
 		}
 
-		public List<Exercicio> findBy(ExercicioFiltro filtro) {
-			return null;
-		}
-		
 	}
 
 

@@ -10,14 +10,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import TSA.Services.ExerService;
-import br.edu.ifpb.esperanca.daw2.ifoto.entities.Usuario;
-import br.edu.ifpb.esperanca.daw2.services.UserService;
 import tudo.sobre.astronomia.tcc.Exercicio;
 
 @ViewScoped
 @Named
 public class ExercicioBean implements Serializable {
-	
 
 	@Inject
 	private ExerService service;
@@ -28,9 +25,7 @@ public class ExercicioBean implements Serializable {
 
 	public ExercicioBean() {
 	}
-	
-	
-	 
+
 	@PostConstruct
 	public void init() {
 		exercicio = newExercicio();

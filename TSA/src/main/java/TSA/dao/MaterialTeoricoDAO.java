@@ -1,15 +1,12 @@
 package TSA.dao;
 
-import java.util.List;
+import tudo.sobre.astronomia.tcc.MaterialTeorico;
 
-public class MaterialTeorico extends DAO <MaterialTeorico>{
+public class MaterialTeoricoDAO extends DAO <MaterialTeorico>{
 
-	public MaterialTeorico() {
+	public MaterialTeoricoDAO() {
 		super(MaterialTeorico.class);
 	}
 
-	public List<MaterialTeorico> findBy(MaterialTeoricoFiltro filtro) {
-		return null;
-	}
 
 }
