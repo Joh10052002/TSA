@@ -13,6 +13,11 @@ import TSA.entites.Identificavel;
 @Entity
 public class Usuario implements Identificavel {
 
+	public Usuario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(generator = "usuario_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "usuario_seq")
@@ -76,19 +81,12 @@ public class Usuario implements Identificavel {
 
 	@Override
 	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 
 	@Override
 	public void setId(Long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public Usuario() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.id = id;
 	}
 
 	public Usuario(Long id, String email, String nome, Date nascimento, String username, String password,

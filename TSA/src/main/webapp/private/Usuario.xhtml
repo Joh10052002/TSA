@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title> Usuario </title>
+</h:head>
+
+
+<h:body>
+	<p:messages />
+
+	<h:form>
+		<p:panelGrid columns="2">
+			<f:facet name="caption">
+				<h:outputText value="Filtros" />
+			</f:facet>
+			<f:facet name="header">
+				<h:outputText value="Usuario" />
+			</f:facet>
+
+			<p:outputLabel value="Nome: " for="nomeField" />
+			<p:inputText id="nomeField" value="#{usuarioBean.usuario.nome}"
+				label="Nome" style="width:350px" />
+
+			<p:outputLabel value="Email: " for="emailField" />
+			<p:inputText id="emailField" value="#{usuarioBean.usuario.email}"
+				label="Nome" style="width:350px" />
+
+			<p:outputLabel value="Nascimento: " for="nascimentoField" />
+			<p:calendar id="nascimentoField"
+				value="#{usuarioBean.usuario.nascimento}" label="Nascimento" />
+				
+				
+
+			<p:outputLabel value="Username: " for="usernameField" />
+			<p:inputText id="usernameField"
+				value="#{usuarioBean.usuario.username}" label="Username"
+				style="width:350px" />
+
+			<p:outputLabel value="Password: " for="passwordField" />
+			<p:password id="passwordField"
+				value="#{usuarioBean.usuario.password}" label="Password"
+				style="width:350px" />
+
+			<p:commandButton id="btnNovo" value="Novo"
+				action="#{usuarioBean.save()}" ajax="false"  />
+			<p:commandButton id="btnLimpar" value="Limpar"
+				action="#{usuarioBean.limpar()}" ajax="false" />
+		</p:panelGrid>
+
+
+		<p:dataTable id="dataTableProfessores" border="1" var="usuario"
+			value="#{usuarioBean.professores}">
+			<p:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{usuario.id}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{usuario.nome}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Email</f:facet>
+				<h:outputText value="#{usuario.email}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Nascimento</f:facet>
+				<h:outputText value="#{usuario.nascimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+			
+			
+			<p:column rendered="#{usuarioBean.isUserInRole('ADIM')}">
+				<f:facet name="header">Opções</f:facet>
+				<p:commandButton value="Remover" ajax="false"
+					action="#{usuarioBean.remove(usuario)}"></p:commandButton>
+				<p:commandButton value="Editar" ajax="false"
+					action="#{usuarioBean.editar(usuario.id)}"></p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
