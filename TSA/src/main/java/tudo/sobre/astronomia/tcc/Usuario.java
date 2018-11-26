@@ -15,7 +15,6 @@ public class Usuario implements Identificavel {
 
 	public Usuario() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Id
@@ -29,7 +28,6 @@ public class Usuario implements Identificavel {
 
 	private String username;
 	private String password;
-	private String grupo;
 
 	public String getEmail() {
 		return email;
@@ -71,14 +69,6 @@ public class Usuario implements Identificavel {
 		this.password = password;
 	}
 
-	public String getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(String grupo) {
-		this.grupo = grupo;
-	}
-
 	@Override
 	public Long getId() {
 		return id;
@@ -98,13 +88,12 @@ public class Usuario implements Identificavel {
 		this.nascimento = nascimento;
 		this.username = username;
 		this.password = password;
-		this.grupo = grupo;
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", email=" + email + ", nome=" + nome + ", nascimento=" + nascimento
-				+ ", username=" + username + ", password=" + password + ", grupo=" + grupo + "]";
+				+ ", username=" + username + ", password=" + password + " ]";
 	}
 
 }
