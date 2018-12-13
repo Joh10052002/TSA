@@ -64,7 +64,7 @@ public class UsuarioRS {
 		u.setNome(nome);
 		u.setPassword(password);
 		u.setUsername(username);
-		return "Salvo comsucesso";
+		return "Salvo com sucesso";
 	}
 
 }

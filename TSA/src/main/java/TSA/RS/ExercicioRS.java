@@ -1,8 +1,6 @@
 package TSA.RS;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,19 +11,20 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.PathSegment;
 
+import TSA.Services.ExerService;
 import tudo.sobre.astronomia.tcc.Exercicio;
 
-@Path (" / exercicio")
+@Path(" / exercicio")
 public class ExercicioRS {
 
 	@Inject
-	private ExercicioService exerService;
+	private ExerService exerService;
 
 	@GET
 	@Path("/nome/{id}")
 	@Produces("text/html")
 	public String getNome(@PathParam("id") Long id) {
-		return "<h1>" + exerService.getByID(id).getNome() + "<h1>";
+		return "<h1>" + exerService.getByID(id).getNomeExer() + "<h1>";
 	}
 
 	@GET
@@ -35,7 +34,7 @@ public class ExercicioRS {
 		String retorno = "<ul>";
 		List<Exercicio> exers = exerService.getAll();
 		for (Exercicio e : exers) {
-			retorno += "<li>" + e.getNome() + "</li>";
+			retorno += "<li>" + e.getNomeExer() + "</li>";
 
 		}
 
@@ -47,24 +46,12 @@ public class ExercicioRS {
 	public String add(@PathParam("exer") PathSegment atributos) throws ParseException {
 		MultivaluedMap<String, String> matrixParameters = atributos.getMatrixParameters();
 		String nome = matrixParameters.getFirst("nome");
-		String email = matrixParameters.getFirst("email");
-		String nascimento = matrixParameters.getFirst("nascimento");
 		String id = matrixParameters.getFirst("id");
-		String password = matrixParameters.getFirst("password");
-		String username = matrixParameters.getFirst("username");
-		
-		/*
-		 * Exercicio u = new Exercicio();
-		 * DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		u.setEmail(email);
-		u.setId(Long.parseLong(id));
-		u.setNome(nome);
-		u.setPassword(password);
-		u.setUsername(username);
+		Exercicio e = new Exercicio();
+		e.setId(Long.parseLong(id));
+		e.setNomeExer(nome);
 		return "Salvo comsucesso";
-		 */
-		
+
 	}
 
 }
-
